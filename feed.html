@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Persona Feed Preview</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0a0a0f;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
+
+  /* Sidebar */
+  .sidebar{position:fixed;left:0;top:0;bottom:0;width:260px;background:#111;border-right:1px solid #222;overflow-y:auto;padding:20px 0;z-index:10}
+  .sidebar h2{padding:0 20px;font-size:1rem;color:rgba(255,255,255,.4);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px;font-weight:500}
+  .niche-label{padding:12px 20px 4px;font-size:.7rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:2px}
+  .persona-btn{display:flex;align-items:center;gap:12px;width:100%;padding:10px 20px;border:none;background:none;color:#fff;cursor:pointer;text-align:left;transition:background .15s}
+  .persona-btn:hover{background:rgba(255,255,255,.05)}
+  .persona-btn.active{background:rgba(255,255,255,.1)}
+  .persona-btn img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #333}
+  .persona-btn .info{line-height:1.3}
+  .persona-btn .pname{font-size:.85rem;font-weight:500}
+  .persona-btn .handle{font-size:.7rem;color:rgba(255,255,255,.4)}
+
+  /* Main content */
+  .main{margin-left:260px;padding:40px;max-width:960px}
+
+  /* Profile header */
+  .profile{display:flex;gap:32px;align-items:flex-start;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid #222}
+  .profile-avatar{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid #333;flex-shrink:0}
+  .profile-info h1{font-size:1.3rem;font-weight:600;margin-bottom:4px}
+  .profile-info .handle-text{color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:12px}
+  .profile-info .bio-text{font-size:.9rem;line-height:1.5;color:rgba(255,255,255,.8);margin-bottom:16px;max-width:400px}
+  .profile-info .stats{display:flex;gap:24px}
+  .profile-info .stat{text-align:center}
+  .profile-info .stat-num{font-weight:600;font-size:1.1rem}
+  .profile-info .stat-label{font-size:.75rem;color:rgba(255,255,255,.4)}
+  .niche-tag{display:inline-block;background:rgba(255,255,255,.08);padding:4px 12px;border-radius:20px;font-size:.75rem;color:rgba(255,255,255,.5);margin-bottom:12px}
+
+  /* Post grid */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+  .grid-item{aspect-ratio:1;overflow:hidden;cursor:pointer;position:relative}
+  .grid-item img{width:100%;height:100%;object-fit:cover;transition:opacity .2s}
+  .grid-item:hover img{opacity:.7}
+  .grid-item.video-item::after{content:"";position:absolute;top:12px;right:12px;width:0;height:0;border-left:12px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent;filter:drop-shadow(0 1px 3px rgba(0,0,0,.5))}
+
+  /* Videos section */
+  .videos-section{margin-top:32px;padding-top:32px;border-top:1px solid #222}
+  .videos-section h3{font-size:.9rem;color:rgba(255,255,255,.4);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+  .video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .video-card{border-radius:8px;overflow:hidden;background:#151520}
+  .video-card video{width:100%;display:block}
+  .video-label{padding:8px 12px;font-size:.8rem;color:rgba(255,255,255,.6)}
+
+  /* Lightbox */
+  .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:100;justify-content:center;align-items:center;cursor:pointer}
+  .lightbox.active{display:flex}
+  .lightbox img{max-width:90vw;max-height:90vh;border-radius:4px}
+
+  /* Empty state */
+  .empty{text-align:center;padding:80px 20px;color:rgba(255,255,255,.3)}
+  .empty p{margin-top:8px;font-size:.9rem}
+
+  @media(max-width:768px){
+    .sidebar{width:70px;padding:10px 0}
+    .sidebar h2,.niche-label,.persona-btn .info{display:none}
+    .persona-btn{justify-content:center;padding:8px}
+    .main{margin-left:70px;padding:20px}
+    .profile{flex-direction:column;align-items:center;text-align:center}
+    .grid{gap:2px}
+  }
+</style>
+</head>
+<body>
+
+<div class="sidebar" id="sidebar"></div>
+<div class="main" id="main">
+  <div class="empty"><h2>Select a persona</h2><p>Click on a profile in the sidebar to view their feed</p></div>
+</div>
+<div class="lightbox" id="lb" onclick="this.classList.remove('active')"><img id="lbi" src=""></div>
+
+<script>
+const BASE = "https://raw.githubusercontent.com/StudioLee-cmd/seedance-content/main";
+
+const personas = [
+  {id:"metal_girl",niche:"Metal",name:"Vera Wolters",handle:"@vera.wolters",bio:"battle vest collector. if it's not heavy, it's not music. [fully AI-generated]",avatar:`${BASE}/personas/01_metal_girl.png`,images:10,niche_key:"metal",videos:[]},
+  {id:"metal_guy",niche:"Metal",name:"Ruben Groen",handle:"@ruben.groen",bio:"patches > personality. live shows or nothing. [fully AI-generated]",avatar:`${BASE}/personas/02_metal_guy.png`,images:10,niche_key:"metal",videos:[]},
+  {id:"goth_girl",niche:"Goth",name:"Nola Ravenstein",handle:"@nola.ravenstein",bio:"candles, velvet, and bad poetry. romanticizing the dark since '01. [fully AI-generated]",avatar:`${BASE}/personas/03_goth_girl.png`,images:10,niche_key:"goth",videos:[]},
+  {id:"goth_guy",niche:"Goth",name:"Dorian Scholten",handle:"@dorian.scholten",bio:"all black everything. rain enthusiast. [fully AI-generated]",avatar:`${BASE}/personas/04_goth_guy.png`,images:10,niche_key:"goth",videos:[]},
+  {id:"punk_girl",niche:"Punk",name:"Fenne Driessen",handle:"@fenne.driessen",bio:"DIY or die. sewing patches at 2am. [fully AI-generated]",avatar:`${BASE}/personas/05_punk_girl.png`,images:10,niche_key:"punk",videos:[]},
+  {id:"punk_guy",niche:"Punk",name:"Jip Overbeek",handle:"@jip.overbeek",bio:"liberty spikes & wheat paste. no gods no masters. [fully AI-generated]",avatar:`${BASE}/personas/06_punk_guy.png`,images:10,niche_key:"punk",videos:[]},
+  {id:"golf_girl",niche:"Golf",name:"Fleur Linthorst",handle:"@fleur.linthorst",bio:"fairways > freeways. sunset rounds are therapy. [fully AI-generated]",avatar:`${BASE}/personas/07_golf_girl.png`,images:10,niche_key:"golf",videos:[]},
+  {id:"golf_guy",niche:"Golf",name:"Floris Kramer",handle:"@floris.kramer",bio:"weekend golfer, weekday dreamer. chasing birdies. [fully AI-generated]",avatar:`${BASE}/personas/08_golf_guy.png`,images:10,niche_key:"golf",videos:[]},
+  {id:"surfer_girl",niche:"Surfer",name:"Yara Blom",handle:"@yara.blom",bio:"chasing swells. salt in my hair, sand in my shoes. [fully AI-generated]",avatar:`${BASE}/personas/09_surfer_girl.png`,images:10,niche_key:"surfer",videos:[{src:`${BASE}/videos/surfer_girl_hanggliding.mp4`,label:"Hang gliding over jungle river"}]},
+  {id:"surfer_guy",niche:"Surfer",name:"Kai Lemmens",handle:"@kai.lemmens",bio:"dawn patrol every day. board, wax, ocean, repeat. [fully AI-generated]",avatar:`${BASE}/personas/10_surfer_guy.png`,images:10,niche_key:"surfer",videos:[]},
+  {id:"streetwear_girl",niche:"Streetwear",name:"Demi van Kesteren",handle:"@demi.vankesteren",bio:"thrifted windbreaker > retail therapy. effortless or nothing. [fully AI-generated]",avatar:`${BASE}/personas/11_streetwear_girl.png`,images:10,niche_key:"streetwear",videos:[]},
+  {id:"streetwear_guy",niche:"Streetwear",name:"Dex ter Haar",handle:"@dex.terhaar",bio:"clean fits, dirty sneakers. the fit speaks. [fully AI-generated]",avatar:`${BASE}/personas/12_streetwear_guy.png`,images:10,niche_key:"streetwear",videos:[]},
+  {id:"raver_girl",niche:"Raver",name:"Senna Luijten",handle:"@senna.luijten",bio:"kandi queen. PLUR is a lifestyle. see you at the stage. [fully AI-generated]",avatar:`${BASE}/personas/13_raver_girl.png`,images:10,niche_key:"raver",videos:[]},
+  {id:"raver_guy",niche:"Raver",name:"Jurre Veldhuis",handle:"@jurre.veldhuis",bio:"bucket hat philosopher. festivals are my love language. [fully AI-generated]",avatar:`${BASE}/personas/14_raver_guy.png`,images:10,niche_key:"raver",videos:[]},
+  {id:"biker_girl",niche:"Biker",name:"Maud van Leeuwen",handle:"@maud.vanleeuwen",bio:"road therapy. leather jacket, open highway, no plan. [fully AI-generated]",avatar:`${BASE}/personas/15_biker_girl.png`,images:10,niche_key:"biker",videos:[{src:`${BASE}/videos/biker_girl_coastal_ride.mp4`,label:"Coastal highway ride"}]},
+  {id:"biker_guy",niche:"Biker",name:"Hidde Kuijpers",handle:"@hidde.kuijpers",bio:"chrome and asphalt. the road doesn't ask questions. [fully AI-generated]",avatar:`${BASE}/personas/16_biker_guy.png`,images:10,niche_key:"biker",videos:[]},
+  {id:"cottagecore_girl",niche:"Cottagecore",name:"Bente Olthuis",handle:"@bente.olthuis",bio:"wildflowers and warm bread. slow living, full heart. [fully AI-generated]",avatar:`${BASE}/personas/17_cottagecore_girl.png`,images:10,niche_key:"cottagecore",videos:[{src:`${BASE}/videos/cottagecore_girl_meadow.mp4`,label:"Wildflower meadow at sunset"}]},
+  {id:"cottagecore_guy",niche:"Cottagecore",name:"Teun Konings",handle:"@teun.konings",bio:"dirt under my nails, herbs in my pocket. garden life. [fully AI-generated]",avatar:`${BASE}/personas/18_cottagecore_guy.png`,images:10,niche_key:"cottagecore",videos:[]},
+];
+
+// Build sidebar
+const sidebar = document.getElementById('sidebar');
+let html = '<h2>Personas</h2>';
+let lastNiche = '';
+personas.forEach(p => {
+  if (p.niche !== lastNiche) {
+    html += `<div class="niche-label">${p.niche}</div>`;
+    lastNiche = p.niche;
+  }
+  html += `<button class="persona-btn" data-id="${p.id}" onclick="showProfile('${p.id}')">
+    <img src="${p.avatar}" alt="${p.name}">
+    <div class="info"><div class="pname">${p.name}</div><div class="handle">${p.handle}</div></div>
+  </button>`;
+});
+sidebar.innerHTML = html;
+
+function showProfile(id) {
+  const p = personas.find(x => x.id === id);
+  if (!p) return;
+
+  // Update active state
+  document.querySelectorAll('.persona-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
+
+  // Build image grid — both guy and girl in a niche share the same aesthetic images
+  let gridHtml = '';
+  // First add the persona's own portrait as first post
+  gridHtml += `<div class="grid-item" onclick="openLb('${p.avatar}')"><img src="${p.avatar}" loading="lazy"></div>`;
+
+  for (let i = 1; i <= p.images; i++) {
+    const num = String(i).padStart(2, '0');
+    const src = `${BASE}/instagram/${p.niche_key}/${num}.jpg`;
+    gridHtml += `<div class="grid-item" onclick="openLb('${src}')"><img src="${src}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`;
+  }
+
+  // Videos section
+  let videosHtml = '';
+  if (p.videos.length > 0) {
+    videosHtml = `<div class="videos-section"><h3>Reels</h3><div class="video-grid">`;
+    p.videos.forEach(v => {
+      videosHtml += `<div class="video-card"><video controls playsinline preload="metadata"><source src="${v.src}" type="video/mp4"></video><div class="video-label">${v.label}</div></div>`;
+    });
+    videosHtml += '</div></div>';
+  }
+
+  const totalPosts = 1 + p.images + p.videos.length;
+
+  document.getElementById('main').innerHTML = `
+    <div class="profile">
+      <img class="profile-avatar" src="${p.avatar}" alt="${p.name}">
+      <div class="profile-info">
+        <span class="niche-tag">${p.niche}</span>
+        <h1>${p.name}</h1>
+        <div class="handle-text">${p.handle}</div>
+        <div class="bio-text">${p.bio}</div>
+        <div class="stats">
+          <div class="stat"><div class="stat-num">${totalPosts}</div><div class="stat-label">posts</div></div>
+          <div class="stat"><div class="stat-num">-</div><div class="stat-label">followers</div></div>
+          <div class="stat"><div class="stat-num">-</div><div class="stat-label">following</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="grid">${gridHtml}</div>
+    ${videosHtml}
+  `;
+}
+
+function openLb(src) {
+  document.getElementById('lbi').src = src;
+  document.getElementById('lb').classList.add('active');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.getElementById('lb').classList.remove('active'); });
+
+// Show first persona by default
+showProfile('metal_girl');
+</script>
+</body>
+</html>
