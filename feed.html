@@ -82,24 +82,24 @@ const BASE = "https://raw.githubusercontent.com/StudioLee-cmd/seedance-content/m
 
 const personas = [
   {id:"timleetv",niche:"Tim Lee TV",name:"Tim Lee",handle:"@timleetv",bio:"AI agency owner. building the future, one automation at a time. StudioLee.nl",avatar:`${BASE}/instagram/timleetv/02.jpg`,images:1,niche_key:"timleetv",videos:[],isReal:true},
-  {id:"metal_girl",niche:"Metal",name:"Vera Wolters",handle:"@vera.wolters",bio:"battle vest collector. if it's not heavy, it's not music. [fully AI-generated]",avatar:`${BASE}/personas/01_metal_girl.png`,images:10,niche_key:"metal",videos:[]},
-  {id:"metal_guy",niche:"Metal",name:"Ruben Groen",handle:"@ruben.groen",bio:"patches > personality. live shows or nothing. [fully AI-generated]",avatar:`${BASE}/personas/02_metal_guy.png`,images:10,niche_key:"metal",videos:[]},
-  {id:"goth_girl",niche:"Goth",name:"Nola Ravenstein",handle:"@nola.ravenstein",bio:"candles, velvet, and bad poetry. romanticizing the dark since '01. [fully AI-generated]",avatar:`${BASE}/personas/03_goth_girl.png`,images:10,niche_key:"goth",videos:[]},
-  {id:"goth_guy",niche:"Goth",name:"Dorian Scholten",handle:"@dorian.scholten",bio:"all black everything. rain enthusiast. [fully AI-generated]",avatar:`${BASE}/personas/04_goth_guy.png`,images:10,niche_key:"goth",videos:[]},
-  {id:"punk_girl",niche:"Punk",name:"Fenne Driessen",handle:"@fenne.driessen",bio:"DIY or die. sewing patches at 2am. [fully AI-generated]",avatar:`${BASE}/personas/05_punk_girl.png`,images:10,niche_key:"punk",videos:[]},
-  {id:"punk_guy",niche:"Punk",name:"Jip Overbeek",handle:"@jip.overbeek",bio:"liberty spikes & wheat paste. no gods no masters. [fully AI-generated]",avatar:`${BASE}/personas/06_punk_guy.png`,images:10,niche_key:"punk",videos:[]},
-  {id:"golf_girl",niche:"Golf",name:"Fleur Linthorst",handle:"@fleur.linthorst",bio:"fairways > freeways. sunset rounds are therapy. [fully AI-generated]",avatar:`${BASE}/personas/07_golf_girl.png`,images:10,niche_key:"golf",videos:[]},
-  {id:"golf_guy",niche:"Golf",name:"Floris Kramer",handle:"@floris.kramer",bio:"weekend golfer, weekday dreamer. chasing birdies. [fully AI-generated]",avatar:`${BASE}/personas/08_golf_guy.png`,images:10,niche_key:"golf",videos:[]},
-  {id:"surfer_girl",niche:"Surfer",name:"Yara Blom",handle:"@yara.blom",bio:"chasing swells. salt in my hair, sand in my shoes. [fully AI-generated]",avatar:`${BASE}/personas/09_surfer_girl.png`,images:10,niche_key:"surfer",videos:[{src:`${BASE}/videos/surfer_girl_hanggliding.mp4`,label:"Hang gliding over jungle river"}]},
-  {id:"surfer_guy",niche:"Surfer",name:"Kai Lemmens",handle:"@kai.lemmens",bio:"dawn patrol every day. board, wax, ocean, repeat. [fully AI-generated]",avatar:`${BASE}/personas/10_surfer_guy.png`,images:10,niche_key:"surfer",videos:[]},
-  {id:"streetwear_girl",niche:"Streetwear",name:"Demi van Kesteren",handle:"@demi.vankesteren",bio:"thrifted windbreaker > retail therapy. effortless or nothing. [fully AI-generated]",avatar:`${BASE}/personas/11_streetwear_girl.png`,images:10,niche_key:"streetwear",videos:[]},
-  {id:"streetwear_guy",niche:"Streetwear",name:"Dex ter Haar",handle:"@dex.terhaar",bio:"clean fits, dirty sneakers. the fit speaks. [fully AI-generated]",avatar:`${BASE}/personas/12_streetwear_guy.png`,images:10,niche_key:"streetwear",videos:[]},
-  {id:"raver_girl",niche:"Raver",name:"Senna Luijten",handle:"@senna.luijten",bio:"kandi queen. PLUR is a lifestyle. see you at the stage. [fully AI-generated]",avatar:`${BASE}/personas/13_raver_girl.png`,images:10,niche_key:"raver",videos:[]},
-  {id:"raver_guy",niche:"Raver",name:"Jurre Veldhuis",handle:"@jurre.veldhuis",bio:"bucket hat philosopher. festivals are my love language. [fully AI-generated]",avatar:`${BASE}/personas/14_raver_guy.png`,images:10,niche_key:"raver",videos:[]},
-  {id:"biker_girl",niche:"Biker",name:"Maud van Leeuwen",handle:"@maud.vanleeuwen",bio:"road therapy. leather jacket, open highway, no plan. [fully AI-generated]",avatar:`${BASE}/personas/15_biker_girl.png`,images:10,niche_key:"biker",videos:[{src:`${BASE}/videos/biker_girl_coastal_ride.mp4`,label:"Coastal highway ride"}]},
-  {id:"biker_guy",niche:"Biker",name:"Hidde Kuijpers",handle:"@hidde.kuijpers",bio:"chrome and asphalt. the road doesn't ask questions. [fully AI-generated]",avatar:`${BASE}/personas/16_biker_guy.png`,images:10,niche_key:"biker",videos:[]},
-  {id:"cottagecore_girl",niche:"Cottagecore",name:"Bente Olthuis",handle:"@bente.olthuis",bio:"wildflowers and warm bread. slow living, full heart. [fully AI-generated]",avatar:`${BASE}/personas/17_cottagecore_girl.png`,images:10,niche_key:"cottagecore",videos:[{src:`${BASE}/videos/cottagecore_girl_meadow.mp4`,label:"Wildflower meadow at sunset"}]},
-  {id:"cottagecore_guy",niche:"Cottagecore",name:"Teun Konings",handle:"@teun.konings",bio:"dirt under my nails, herbs in my pocket. garden life. [fully AI-generated]",avatar:`${BASE}/personas/18_cottagecore_guy.png`,images:10,niche_key:"cottagecore",videos:[]},
+  {id:"metal_girl",niche:"Metal",name:"Vera Wolters",handle:"@vera.wolters",bio:"battle vest collector. if it's not heavy, it's not music. [fully AI-generated]",avatar:`${BASE}/personas/01_metal_girl.png`,images:10,niche_key:"metal",person_key:"01_metal_girl",person_images:3,videos:[]},
+  {id:"metal_guy",niche:"Metal",name:"Ruben Groen",handle:"@ruben.groen",bio:"patches > personality. live shows or nothing. [fully AI-generated]",avatar:`${BASE}/personas/02_metal_guy.png`,images:10,niche_key:"metal",person_key:"02_metal_guy",person_images:5,videos:[]},
+  {id:"goth_girl",niche:"Goth",name:"Nola Ravenstein",handle:"@nola.ravenstein",bio:"candles, velvet, and bad poetry. romanticizing the dark since '01. [fully AI-generated]",avatar:`${BASE}/personas/03_goth_girl.png`,images:10,niche_key:"goth",person_key:"03_goth_girl",person_images:5,videos:[]},
+  {id:"goth_guy",niche:"Goth",name:"Dorian Scholten",handle:"@dorian.scholten",bio:"all black everything. rain enthusiast. [fully AI-generated]",avatar:`${BASE}/personas/04_goth_guy.png`,images:10,niche_key:"goth",person_key:"04_goth_guy",person_images:2,videos:[]},
+  {id:"punk_girl",niche:"Punk",name:"Fenne Driessen",handle:"@fenne.driessen",bio:"DIY or die. sewing patches at 2am. [fully AI-generated]",avatar:`${BASE}/personas/05_punk_girl.png`,images:10,niche_key:"punk",person_key:"05_punk_girl",person_images:5,videos:[]},
+  {id:"punk_guy",niche:"Punk",name:"Jip Overbeek",handle:"@jip.overbeek",bio:"liberty spikes & wheat paste. no gods no masters. [fully AI-generated]",avatar:`${BASE}/personas/06_punk_guy.png`,images:10,niche_key:"punk",person_key:"06_punk_guy",person_images:4,videos:[]},
+  {id:"golf_girl",niche:"Golf",name:"Fleur Linthorst",handle:"@fleur.linthorst",bio:"fairways > freeways. sunset rounds are therapy. [fully AI-generated]",avatar:`${BASE}/personas/07_golf_girl.png`,images:10,niche_key:"golf",person_key:"07_golf_girl",person_images:5,videos:[]},
+  {id:"golf_guy",niche:"Golf",name:"Floris Kramer",handle:"@floris.kramer",bio:"weekend golfer, weekday dreamer. chasing birdies. [fully AI-generated]",avatar:`${BASE}/personas/08_golf_guy.png`,images:10,niche_key:"golf",person_key:"08_golf_guy",person_images:5,videos:[]},
+  {id:"surfer_girl",niche:"Surfer",name:"Yara Blom",handle:"@yara.blom",bio:"chasing swells. salt in my hair, sand in my shoes. [fully AI-generated]",avatar:`${BASE}/personas/09_surfer_girl.png`,images:10,niche_key:"surfer",person_key:"09_surfer_girl",person_images:5,videos:[{src:`${BASE}/videos/surfer_girl_hanggliding.mp4`,label:"Hang gliding over jungle river"}]},
+  {id:"surfer_guy",niche:"Surfer",name:"Kai Lemmens",handle:"@kai.lemmens",bio:"dawn patrol every day. board, wax, ocean, repeat. [fully AI-generated]",avatar:`${BASE}/personas/10_surfer_guy.png`,images:10,niche_key:"surfer",person_key:"10_surfer_guy",person_images:5,videos:[]},
+  {id:"streetwear_girl",niche:"Streetwear",name:"Demi van Kesteren",handle:"@demi.vankesteren",bio:"thrifted windbreaker > retail therapy. effortless or nothing. [fully AI-generated]",avatar:`${BASE}/personas/11_streetwear_girl.png`,images:10,niche_key:"streetwear",person_key:"11_streetwear_girl",person_images:5,videos:[]},
+  {id:"streetwear_guy",niche:"Streetwear",name:"Dex ter Haar",handle:"@dex.terhaar",bio:"clean fits, dirty sneakers. the fit speaks. [fully AI-generated]",avatar:`${BASE}/personas/12_streetwear_guy.png`,images:10,niche_key:"streetwear",person_key:"12_streetwear_guy",person_images:5,videos:[]},
+  {id:"raver_girl",niche:"Raver",name:"Senna Luijten",handle:"@senna.luijten",bio:"kandi queen. PLUR is a lifestyle. see you at the stage. [fully AI-generated]",avatar:`${BASE}/personas/13_raver_girl.png`,images:10,niche_key:"raver",person_key:"13_raver_girl",person_images:5,videos:[]},
+  {id:"raver_guy",niche:"Raver",name:"Jurre Veldhuis",handle:"@jurre.veldhuis",bio:"bucket hat philosopher. festivals are my love language. [fully AI-generated]",avatar:`${BASE}/personas/14_raver_guy.png`,images:10,niche_key:"raver",person_key:"14_raver_guy",person_images:5,videos:[]},
+  {id:"biker_girl",niche:"Biker",name:"Maud van Leeuwen",handle:"@maud.vanleeuwen",bio:"road therapy. leather jacket, open highway, no plan. [fully AI-generated]",avatar:`${BASE}/personas/15_biker_girl.png`,images:10,niche_key:"biker",person_key:"15_biker_girl",person_images:5,videos:[{src:`${BASE}/videos/biker_girl_coastal_ride.mp4`,label:"Coastal highway ride"}]},
+  {id:"biker_guy",niche:"Biker",name:"Hidde Kuijpers",handle:"@hidde.kuijpers",bio:"chrome and asphalt. the road doesn't ask questions. [fully AI-generated]",avatar:`${BASE}/personas/16_biker_guy.png`,images:10,niche_key:"biker",person_key:"16_biker_guy",person_images:5,videos:[]},
+  {id:"cottagecore_girl",niche:"Cottagecore",name:"Bente Olthuis",handle:"@bente.olthuis",bio:"wildflowers and warm bread. slow living, full heart. [fully AI-generated]",avatar:`${BASE}/personas/17_cottagecore_girl.png`,images:10,niche_key:"cottagecore",person_key:"17_cottagecore_girl",person_images:5,videos:[{src:`${BASE}/videos/cottagecore_girl_meadow.mp4`,label:"Wildflower meadow at sunset"}]},
+  {id:"cottagecore_guy",niche:"Cottagecore",name:"Teun Konings",handle:"@teun.konings",bio:"dirt under my nails, herbs in my pocket. garden life. [fully AI-generated]",avatar:`${BASE}/personas/18_cottagecore_guy.png`,images:10,niche_key:"cottagecore",person_key:"18_cottagecore_guy",person_images:5,videos:[]},
 ];
 
 // Build sidebar
@@ -132,10 +132,18 @@ function showProfile(id) {
     gridHtml += `<div class="grid-item" onclick="openLb('${p.avatar}')"><img src="${p.avatar}" loading="lazy"></div>`;
   }
 
+  // Aesthetic niche images (shared between guy + girl)
   for (let i = 1; i <= p.images; i++) {
     const num = String(i).padStart(2, '0');
     const src = `${BASE}/instagram/${p.niche_key}/${num}.jpg`;
     gridHtml += `<div class="grid-item" onclick="openLb('${src}')"><img src="${src}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`;
+  }
+  // Person-in-scene images (unique per persona)
+  if (p.person_key) {
+    for (let i = 1; i <= (p.person_images||0); i++) {
+      const src = `${BASE}/instagram/person/${p.person_key}/p${i}.jpg`;
+      gridHtml += `<div class="grid-item" onclick="openLb('${src}')"><img src="${src}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`;
+    }
   }
 
   // Videos section
@@ -148,7 +156,7 @@ function showProfile(id) {
     videosHtml += '</div></div>';
   }
 
-  const totalPosts = (p.isReal ? 0 : 1) + p.images + p.videos.length;
+  const totalPosts = (p.isReal ? 0 : 1) + p.images + (p.person_images||0) + p.videos.length;
   const badge = p.isReal ? '<span class="niche-tag" style="background:rgba(59,130,246,.15);color:#60a5fa">REAL PERSON</span>' : `<span class="niche-tag">${p.niche}</span>`;
 
   // For empty profiles (like Tim Lee TV before content is added)
