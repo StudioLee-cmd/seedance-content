@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Personas — Review Board</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0a0a0f;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:40px 20px}
+  h1{text-align:center;font-size:2rem;margin-bottom:8px;font-weight:600}
+  .sub{text-align:center;color:rgba(255,255,255,.5);margin-bottom:32px;font-size:.95rem}
+  .filters{text-align:center;margin-bottom:32px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .filters button{background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.7);padding:6px 16px;border-radius:20px;cursor:pointer;font-size:.85rem;transition:all .2s}
+  .filters button:hover,.filters button.active{background:rgba(255,255,255,.2);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;max-width:1440px;margin:0 auto}
+  .card{border-radius:12px;overflow:hidden;background:#151520;transition:transform .2s,opacity .3s;cursor:pointer}
+  .card:hover{transform:translateY(-4px)}
+  .card.hidden{display:none}
+  .card img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+  .label{padding:16px;display:flex;justify-content:space-between;align-items:center}
+  .niche{background:rgba(255,255,255,.08);padding:4px 12px;border-radius:20px;font-size:.8rem;color:rgba(255,255,255,.6)}
+  .name{font-weight:500;font-size:.95rem}
+  .stats{text-align:center;margin-top:40px;color:rgba(255,255,255,.3);font-size:.85rem}
+  .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:100;justify-content:center;align-items:center;cursor:pointer}
+  .lightbox.active{display:flex}
+  .lightbox img{max-width:90vw;max-height:90vh;border-radius:8px}
+</style>
+</head>
+<body>
+<h1>AI Personas — Seedance 2.0</h1>
+<p class="sub">18 characters across 9 niches — all fully AI-generated &middot; Click to enlarge</p>
+<div class="filters">
+  <button class="active" data-filter="all">All</button>
+  <button data-filter="metal">Metal</button>
+  <button data-filter="goth">Goth</button>
+  <button data-filter="punk">Punk</button>
+  <button data-filter="golf">Golf</button>
+  <button data-filter="surfer">Surfer</button>
+  <button data-filter="streetwear">Streetwear</button>
+  <button data-filter="raver">Raver</button>
+  <button data-filter="biker">Biker</button>
+  <button data-filter="cottagecore">Cottagecore</button>
+</div>
+<div class="grid">
+      <div class="card" data-niche="metal">
+        <img src="personas/01_metal_girl.png" alt="Metal Girl" loading="lazy">
+        <div class="label"><span class="niche">Metal</span><span class="name">Metal Girl</span></div>
+      </div>
+      <div class="card" data-niche="metal">
+        <img src="personas/02_metal_guy.png" alt="Metal Guy" loading="lazy">
+        <div class="label"><span class="niche">Metal</span><span class="name">Metal Guy</span></div>
+      </div>
+      <div class="card" data-niche="goth">
+        <img src="personas/03_goth_girl.png" alt="Goth Girl" loading="lazy">
+        <div class="label"><span class="niche">Goth</span><span class="name">Goth Girl</span></div>
+      </div>
+      <div class="card" data-niche="goth">
+        <img src="personas/04_goth_guy.png" alt="Goth Guy" loading="lazy">
+        <div class="label"><span class="niche">Goth</span><span class="name">Goth Guy</span></div>
+      </div>
+      <div class="card" data-niche="punk">
+        <img src="personas/05_punk_girl.png" alt="Punk Girl" loading="lazy">
+        <div class="label"><span class="niche">Punk</span><span class="name">Punk Girl</span></div>
+      </div>
+      <div class="card" data-niche="punk">
+        <img src="personas/06_punk_guy.png" alt="Punk Guy" loading="lazy">
+        <div class="label"><span class="niche">Punk</span><span class="name">Punk Guy</span></div>
+      </div>
+      <div class="card" data-niche="golf">
+        <img src="personas/07_golf_girl.png" alt="Golf Girl" loading="lazy">
+        <div class="label"><span class="niche">Golf</span><span class="name">Golf Girl</span></div>
+      </div>
+      <div class="card" data-niche="golf">
+        <img src="personas/08_golf_guy.png" alt="Golf Guy" loading="lazy">
+        <div class="label"><span class="niche">Golf</span><span class="name">Golf Guy</span></div>
+      </div>
+      <div class="card" data-niche="surfer">
+        <img src="personas/09_surfer_girl.png" alt="Surfer Girl" loading="lazy">
+        <div class="label"><span class="niche">Surfer</span><span class="name">Surfer Girl</span></div>
+      </div>
+      <div class="card" data-niche="surfer">
+        <img src="personas/10_surfer_guy.png" alt="Surfer Guy" loading="lazy">
+        <div class="label"><span class="niche">Surfer</span><span class="name">Surfer Guy</span></div>
+      </div>
+      <div class="card" data-niche="streetwear">
+        <img src="personas/11_streetwear_girl.png" alt="Streetwear Girl" loading="lazy">
+        <div class="label"><span class="niche">Streetwear</span><span class="name">Streetwear Girl</span></div>
+      </div>
+      <div class="card" data-niche="streetwear">
+        <img src="personas/12_streetwear_guy.png" alt="Streetwear Guy" loading="lazy">
+        <div class="label"><span class="niche">Streetwear</span><span class="name">Streetwear Guy</span></div>
+      </div>
+      <div class="card" data-niche="raver">
+        <img src="personas/13_raver_girl.png" alt="Raver Girl" loading="lazy">
+        <div class="label"><span class="niche">Raver</span><span class="name">Raver Girl</span></div>
+      </div>
+      <div class="card" data-niche="raver">
+        <img src="personas/14_raver_guy.png" alt="Raver Guy" loading="lazy">
+        <div class="label"><span class="niche">Raver</span><span class="name">Raver Guy</span></div>
+      </div>
+      <div class="card" data-niche="biker">
+        <img src="personas/15_biker_girl.png" alt="Biker Girl" loading="lazy">
+        <div class="label"><span class="niche">Biker</span><span class="name">Biker Girl</span></div>
+      </div>
+      <div class="card" data-niche="biker">
+        <img src="personas/16_biker_guy.png" alt="Biker Guy" loading="lazy">
+        <div class="label"><span class="niche">Biker</span><span class="name">Biker Guy</span></div>
+      </div>
+      <div class="card" data-niche="cottagecore">
+        <img src="personas/17_cottagecore_girl.png" alt="Cottagecore Girl" loading="lazy">
+        <div class="label"><span class="niche">Cottagecore</span><span class="name">Cottagecore Girl</span></div>
+      </div>
+      <div class="card" data-niche="cottagecore">
+        <img src="personas/18_cottagecore_guy.png" alt="Cottagecore Guy" loading="lazy">
+        <div class="label"><span class="niche">Cottagecore</span><span class="name">Cottagecore Guy</span></div>
+      </div>
+</div>
+<p class="stats">9 niches &middot; 18 personas &middot; Generated with Nano Banana Pro &middot; StudioLee</p>
+<div class="lightbox" id="lb" onclick="this.classList.remove('active')"><img id="lbi" src="" alt=""></div>
+<script>
+document.querySelectorAll('.card').forEach(c=>c.addEventListener('click',()=>{document.getElementById('lbi').src=c.querySelector('img').src;document.getElementById('lb').classList.add('active')}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lb').classList.remove('active')});
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  const f=b.dataset.filter;
+  document.querySelectorAll('.card').forEach(c=>{c.classList.toggle('hidden',f!=='all'&&c.dataset.niche!==f)});
+}));
+</script>
+</body>
+</html>
